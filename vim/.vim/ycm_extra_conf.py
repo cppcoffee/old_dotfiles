@@ -17,7 +17,9 @@ BASE_FLAGS = [
         '-std=c++11',
         '-xc++',
         '-I/usr/lib/',
-        '-I/usr/include/'
+        '-I/usr/include/',
+        '-I/usr/local/include/',
+        '-I.'
         ]
 
 SOURCE_EXTENSIONS = [
