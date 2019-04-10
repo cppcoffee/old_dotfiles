@@ -200,8 +200,9 @@ nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 " 忽略文件
-let NERDTreeIgnore = ['\.git', '\.lo', '\.o', '\.ko', '\.cmd', '\.swp', '\.a',
-            \ '\.DS_Store', '\.swp', '\.pyc', '__pycache__', '.deps', 'autom4te.cache']
+let NERDTreeIgnore = ['\.git$', '\.lo$', '\.o$', '\.ko$', '\.cmd$', '\.swp$',
+        \ '\.a$', '\.DS_Store$', '\.swp$', '\.pyc$', '__pycache__$', '.deps$',
+        \ 'autom4te.cache$']
 
 
 " === YCM ===
