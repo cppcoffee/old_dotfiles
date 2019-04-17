@@ -1,4 +1,26 @@
-source ~/.vim/bundles.vim
+" vundle 环境设置
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+" vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'kien/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'fatih/vim-go'
+Plugin 'sbdchd/neoformat'
+Plugin 'rust-lang/rust.vim'
+" 插件列表结束
+call vundle#end()
+filetype plugin indent on
+
 
 let mapleader=";"
 " 设置快捷键将选中文本块复制至系统剪贴板
@@ -287,6 +309,10 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+
+
+" === rust-lang ===
+let g:rustfmt_autosave = 1
 
 
 " === vim-indent-guides ===
