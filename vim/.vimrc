@@ -266,7 +266,10 @@ endif
 
 " === rust ===
 " 指定rust src目录
-let g:ycm_rust_src_path = '/usr/local/Cellar/rust/1.31.0/share/rust/rust_src/'
+let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src/'
+let g:rustfmt_autosave = 1
+
+
 
 
 " === golang ===
@@ -309,10 +312,6 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
-
-
-" === rust-lang ===
-let g:rustfmt_autosave = 1
 
 
 " === vim-indent-guides ===
