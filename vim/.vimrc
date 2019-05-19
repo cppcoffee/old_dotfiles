@@ -14,7 +14,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'vim-airline/vim-airline'
-Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plugin 'sbdchd/neoformat'
 Plugin 'rust-lang/rust.vim'
 " 插件列表结束
@@ -91,7 +91,8 @@ set background=dark
 
 let g:molokai_original = 1
 let g:rehash256 = 1
-colorscheme molokai
+colorscheme monokai
+"colorscheme molokai
 "colorscheme phd
 
 set colorcolumn=80
@@ -266,7 +267,7 @@ endif
 
 " === rust ===
 " 指定rust src目录
-let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src/'
+let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
 let g:rustfmt_autosave = 1
 
 
@@ -312,6 +313,9 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+" golint
+set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
+autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 
 
 " === vim-indent-guides ===
