@@ -2,13 +2,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdtree',  { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --rust-completer' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/vim-signify'
-Plug 'kien/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -144,6 +144,25 @@ if has("autocmd")
     \   exe "normal g'\"" |
     \ endif
 endif
+
+
+" === LeaderF ===
+let g:Lf_ShortcutF = '<c-p>'
+let g:Lf_ShortcutB = '<m-n>'
+noremap <c-n> :LeaderfMru<cr>
+noremap <m-p> :LeaderfFunction!<cr>
+noremap <m-n> :LeaderfBuffer<cr>
+noremap <m-m> :LeaderfTag<cr>
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 
 
 " === tagbar ===
