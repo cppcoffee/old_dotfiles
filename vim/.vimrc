@@ -1,24 +1,19 @@
-" vundle 环境设置
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-" vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'kien/ctrlp.vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plugin 'sbdchd/neoformat'
-Plugin 'rust-lang/rust.vim'
-" 插件列表结束
-call vundle#end()
+call plug#begin('~/.vim/plugged')
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree',  { 'on':  'NERDTreeToggle' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --rust-completer' }
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'kien/ctrlp.vim'
+Plug 'mileszs/ack.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'sbdchd/neoformat'
+Plug 'rust-lang/rust.vim'
+call plug#end()
+
 filetype plugin indent on
 
 
@@ -385,8 +380,6 @@ endif
 
 
 " === ctags ===
-if filereadable("tags")
-    set tags+=./tags
-endif
+set tags=./.tags;,.tags
 
 
