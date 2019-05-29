@@ -10,6 +10,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
+Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'sbdchd/neoformat'
