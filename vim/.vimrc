@@ -7,6 +7,7 @@ Plug 'scrooloose/nerdtree',  { 'on':  'NERDTreeToggle' }
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --rust-completer' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'mhinz/vim-signify'
 Plug 'kien/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'vim-airline/vim-airline'
@@ -239,6 +240,11 @@ let g:gutentags_cache_dir = s:vim_tags
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+
+" === vim-signify ===
+" 强制显示侧边栏
+set signcolumn=yes
 
 
 " === YCM ===
