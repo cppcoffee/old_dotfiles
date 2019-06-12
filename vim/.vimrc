@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('$HOME/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -196,6 +196,7 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
 " 选中项
 highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
+
 " 补全功能在注释中同样有效
 let g:ycm_complete_in_comments=1
 " 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
@@ -204,6 +205,12 @@ let g:ycm_confirm_extra_conf=0
 let g:ycm_collect_identifiers_from_tags_files=1
 " YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
 inoremap <leader>; <C-x><C-o>
+" go to definition
+nnoremap <leader>gt :YouCompleteMe GoTo<CR>
+" 跳转到定义
+nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
+" goto doc
+nnoremap <leader>gc :YcmCompleter GetDoc<CR>
 " 补全内容不以分割子窗口形式出现，只显示补全列表
 set completeopt-=preview
 " 从第2个键入字符就开始罗列匹配项
@@ -214,6 +221,15 @@ let g:ycm_cache_omnifunc=0
 let g:ycm_seed_identifiers_with_syntax=1
 " 开启 YCM 标签引擎
 let g:ycm_collect_identifiers_from_tags_files=1
+" ycm指定python
+let g:ycm_python_interpreter_path = '/usr/local/bin/python3'
+
+if has('python3')
+  silent! python3 1
+endif
+
+" 指定rust src目录
+let g:ycm_rust_src_path = '$HOME/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
 
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_show_diagnostics_ui = 0
@@ -227,31 +243,28 @@ set completeopt=menu,menuone
 noremap <c-z> <NOP>
 
 let g:ycm_semantic_triggers =  {
-      \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-      \ 'cs,lua,javascript': ['re!\w{2}'],
-      \ }
+  \   'c': ['->', '.'],
+  \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+  \            're!\[.*\]\s'],
+  \   'ocaml': ['.', '#'],
+  \   'cpp,cuda,objcpp': ['->', '.', '::'],
+  \   'perl': ['->'],
+  \   'php': ['->', '::'],
+  \   'cs,d,elixir,go,groovy,java,javascript,julia,perl6,python,scala,typescript,vb': ['.'],
+  \   'ruby,rust': ['.', '::'],
+  \   'lua': ['.', ':'],
+  \   'erlang': [':'],
+  \ }
 
 
 
-" === python ===
-" 指定python
-let g:ycm_python_binary_path = '/usr/local/bin/python3'
-
-if has('python3')
-  silent! python3 1
-endif
-
-
-
-" === rust ===
-" 指定rust src目录
-let g:ycm_rust_src_path = '~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
+" === rust.vim ===
 let g:rustfmt_autosave = 1
 let g:rust_use_custom_ctags_defs = 1  " if using rust.vim
 
 
 
-" === golang ===
+" === vim-go ===
 " 禁止自动下载
 let g:go_disable_autoinstall = 0
 " golang高亮
