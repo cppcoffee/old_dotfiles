@@ -273,9 +273,6 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-" golang跳转
-nnoremap <leader>gd :GoDef<CR>
-nnoremap <leader>gr :GoReferrers<CR>
 " golint
 set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
