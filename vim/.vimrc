@@ -223,6 +223,8 @@ let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_collect_identifiers_from_tags_files=1
 " ycm指定python
 let g:ycm_python_interpreter_path = '/usr/local/bin/python3'
+" C family Completion Path
+let g:ycm_global_ycm_extra_conf = '$HOME/.vim/.ycm_extra_conf.py'
 
 if has('python3')
   silent! python3 1
