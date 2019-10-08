@@ -13,7 +13,8 @@ hs.hotkey.bind(mods, "E", function()
 end)
 
 hs.hotkey.bind(mods, "L", function()
-	hs.caffeinate:lockScreen()
+    --hs.caffeinate:lockScreen()
+    hs.caffeinate.lockScreen()
 end)
 
 
