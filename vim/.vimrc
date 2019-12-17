@@ -230,6 +230,15 @@ if has('python3')
   silent! python3 1
 endif
 
+" cpp ccls server
+let g:ycm_language_server =
+  \ [{
+  \   'name': 'ccls',
+  \   'cmdline': [ 'ccls' ],
+  \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
+  \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
+  \ }]
+
 " 指定rust src目录
 let g:ycm_rust_src_path = '$HOME/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
 
@@ -374,14 +383,15 @@ if has("cscope")
     " show msg when any other cscope db added
     set cscopeverbose
     " key map
-    nmap <leader>fs :cs find s <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>fg :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <leader>fa :cs find a <C-R>=expand("<cword>")<CR><CR>
     nmap <leader>fc :cs find c <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>ft :cs find t <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>
     nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
+    nmap <leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>
     nmap <leader>ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <leader>fg :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <leader>fs :cs find s <C-R>=expand("<cword>")<CR><CR>
     nmap <leader>fi :cs find i <C-R>=expand("<cfile>")<CR><CR>
+    nmap <leader>ft :cs find t <C-R>=expand("<cword>")<CR><CR>
 endif
 
 
