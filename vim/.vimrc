@@ -1,6 +1,7 @@
 call plug#begin('$HOME/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
+Plug 'sickill/vim-monokai'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'justinmk/vim-dirvish'
