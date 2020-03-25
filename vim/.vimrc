@@ -372,6 +372,8 @@ let g:neoformat_basic_format_trim = 1
 
 " === cscope ===
 if has("cscope")
+    " avoid 'Added cscope database' on vim launch
+    set nocscopeverbose
     " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
     set cscopetag
     " check cscope for definition of a symbol before checking ctags: set to 1
