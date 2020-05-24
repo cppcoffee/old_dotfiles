@@ -1,5 +1,6 @@
 call plug#begin('$HOME/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
+Plug 'tomasiser/vim-code-dark'
 Plug 'tomasr/molokai'
 Plug 'sickill/vim-monokai'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -77,6 +78,7 @@ set wildmenu
 
 " 启用256色
 set t_Co=256
+set t_ut=
 
 " 允许用指定语法高亮配色方案替换默认方案
 syntax on
@@ -87,9 +89,13 @@ set background=dark
 "let g:solarized_termcolors=256
 "colorscheme solarized
 
-let g:molokai_original = 1
-let g:rehash256 = 1
-colorscheme monokai
+colorscheme codedark
+let g:airline_theme = 'codedark'
+
+
+"let g:molokai_original = 1
+"let g:rehash256 = 1
+"colorscheme monokai
 "colorscheme molokai
 "colorscheme phd
 
