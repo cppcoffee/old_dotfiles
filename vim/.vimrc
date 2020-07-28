@@ -1,11 +1,13 @@
 call plug#begin('$HOME/.vim/plugged')
+" Color scheme
 Plug 'altercation/vim-colors-solarized'
 Plug 'tomasiser/vim-code-dark'
 Plug 'tomasr/molokai'
 Plug 'sickill/vim-monokai'
+Plug 'justinmk/vim-dirvish'
+
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-Plug 'justinmk/vim-dirvish'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --rust-completer' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'ludovicchabant/vim-gutentags'
@@ -13,8 +15,10 @@ Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
 Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'sbdchd/neoformat'
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+" Rust
 Plug 'rust-lang/rust.vim'
 call plug#end()
 
@@ -312,6 +316,8 @@ let g:indent_guides_guide_size=1
 " === signify ===
 " 强制显示侧边栏
 set signcolumn=yes
+" default updatetime 4000ms is not good for async update
+set updatetime=3000
 
 
 
@@ -375,7 +381,6 @@ let g:neoformat_basic_format_retab = 1
 let g:neoformat_basic_format_trim = 1
 
 
-
 " === cscope ===
 if has("cscope")
     " avoid 'Added cscope database' on vim launch
@@ -402,9 +407,4 @@ if has("cscope")
     nmap <leader>fi :cs find i <C-R>=expand("<cfile>")<CR><CR>
     nmap <leader>ft :cs find t <C-R>=expand("<cword>")<CR><CR>
 endif
-
-
-
-" === ctags ===
-set tags=./.tags;,.tags
 
