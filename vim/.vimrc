@@ -16,6 +16,8 @@ Plug 'mileszs/ack.vim'
 Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'sbdchd/neoformat'
+" Format
+Plug 'junegunn/vim-easy-align'
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " Rust
