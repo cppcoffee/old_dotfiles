@@ -8,19 +8,17 @@ Plug 'justinmk/vim-dirvish'
 
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --rust-completer' }
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
 Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
-Plug 'sbdchd/neoformat'
 " Format
+Plug 'sbdchd/neoformat'
 Plug 'junegunn/vim-easy-align'
-" Go
+" Code Completion
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --rust-completer' }
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-" Rust
 Plug 'rust-lang/rust.vim'
 call plug#end()
 
@@ -96,8 +94,6 @@ set background=dark
 "colorscheme solarized
 
 colorscheme codedark
-let g:airline_theme = 'codedark'
-
 
 "let g:molokai_original = 1
 "let g:rehash256 = 1
@@ -182,24 +178,6 @@ let g:Lf_ShowRelativePath = 0
 let g:Lf_HideHelp = 1
 let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
-
-
-
-" === vim-gutentags ===
-" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-
-" 所生成的数据文件的名称
-let g:gutentags_ctags_tagfile = '.tags'
-
-" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-let s:vim_tags = expand('~/.cache/tags')
-let g:gutentags_cache_dir = s:vim_tags
-
-" 配置 ctags 的参数
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 
 
@@ -349,6 +327,7 @@ hi! SpellRare gui=undercurl guisp=magenta
 
 
 " === airline ===
+let g:airline_theme = 'codedark'
 " enable airline tab line
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -381,6 +360,7 @@ let g:neoformat_basic_format_align = 1
 let g:neoformat_basic_format_retab = 1
 " Enable trimmming of trailing whitespace
 let g:neoformat_basic_format_trim = 1
+
 
 
 " === cscope ===
