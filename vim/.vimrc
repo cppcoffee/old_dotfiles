@@ -1,30 +1,42 @@
 call plug#begin('$HOME/.vim/plugged')
 " Color scheme
-Plug 'altercation/vim-colors-solarized'
 Plug 'tomasiser/vim-code-dark'
-Plug 'tomasr/molokai'
-Plug 'sickill/vim-monokai'
-Plug 'justinmk/vim-dirvish'
 
-Plug 'nathanaelkane/vim-indent-guides'
+" Directory viewer for Vim
+Plug 'justinmk/vim-dirvish'
+Plug 'kristijanhusak/vim-dirvish-git'
+
+" An efficient fuzzy finder that helps to locate files, buffers, etc.
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+
+" visually displaying indent levels
+Plug 'nathanaelkane/vim-indent-guides'
+
+" Show a diff using Vim its sign column.
 Plug 'mhinz/vim-signify'
+
+" Run your favorite search tool from Vim, with an enhanced results list.
 Plug 'mileszs/ack.vim'
-Plug 'w0rp/ale'
+
+" lean & mean status/tabline for vim that's light as air
 Plug 'vim-airline/vim-airline'
-" Format
+
+" formatting code.
 Plug 'sbdchd/neoformat'
+
+" A Vim alignment plugin
 Plug 'junegunn/vim-easy-align'
+
 " Code Completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --rust-completer' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'rust-lang/rust.vim'
+
+" tags and cscope
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'brookhong/cscope.vim'
 call plug#end()
 
-
-filetype plugin indent on
 
 let mapleader=";"
 " 设置快捷键将选中文本块复制至系统剪贴板
@@ -91,16 +103,7 @@ syntax on
 " 配色方案
 syntax enable
 set background=dark
-"let g:solarized_termcolors=256
-"colorscheme solarized
-
 colorscheme codedark
-
-"let g:molokai_original = 1
-"let g:rehash256 = 1
-"colorscheme monokai
-"colorscheme molokai
-"colorscheme phd
 
 set colorcolumn=80
 
@@ -147,30 +150,40 @@ set foldmethod=syntax
 set nofoldenable
 
 
-if has("autocmd")
-    " When editing a file, always jump to the last cursor position
-    autocmd BufReadPost *
-    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-    \   exe "normal g'\"" |
-    \ endif
-endif
+" When editing a file, always jump to the last cursor position
+autocmd BufReadPost *
+            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+            \   exe "normal g'\"" |
+            \ endif
 
 
 
 " === dirvish ===
 nmap <Leader>fl :Dirvish<CR>
+" Ignored files are not marked by default.
+let g:dirvish_git_show_ignored = 1
 
 
 
 " === LeaderF ===
+let g:Lf_PreviewInPopup = 1
+" key bindings
+let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
+" default mapping of searching files command
 let g:Lf_ShortcutF = '<c-p>'
-let g:Lf_ShortcutB = '<m-n>'
-nmap <Leader>lm :LeaderfMru<CR>
-nmap <Leader>lf :LeaderfFunction!<CR>
-nmap <Leader>lb :LeaderfBuffer<CR>
-nmap <Leader>lt :LeaderfTag<CR>
-let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+" Show icons, icons are shown by default
+let g:Lf_ShowDevIcons = 1
 
+" search most recently used files
+nmap <Leader>lm :LeaderfMru<CR>
+" navigate functions or methods in the buffer
+nmap <Leader>lf :LeaderfFunction!<CR>
+" search buffers
+nmap <Leader>lb :LeaderfBuffer<CR>
+" navigate tags using the tags file
+nmap <Leader>lt :LeaderfTag<CR>
+
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
 let g:Lf_WorkingDirectoryMode = 'Ac'
 let g:Lf_WindowHeight = 0.30
@@ -219,17 +232,17 @@ let g:ycm_python_interpreter_path = '/usr/local/bin/python3'
 let g:ycm_global_ycm_extra_conf = '$HOME/.vim/.ycm_extra_conf.py'
 
 if has('python3')
-  silent! python3 1
+    silent! python3 1
 endif
 
 " cpp ccls server
 let g:ycm_language_server =
-  \ [{
-  \   'name': 'ccls',
-  \   'cmdline': [ 'ccls' ],
-  \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
-  \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
-  \ }]
+            \ [{
+            \   'name': 'ccls',
+            \   'cmdline': [ 'ccls' ],
+            \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
+            \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
+            \ }]
 
 " 指定rust src目录
 let g:ycm_rust_src_path = '$HOME/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
@@ -246,18 +259,18 @@ set completeopt=menu,menuone
 noremap <c-z> <NOP>
 
 let g:ycm_semantic_triggers =  {
-  \   'c': ['->', '.'],
-  \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
-  \            're!\[.*\]\s'],
-  \   'ocaml': ['.', '#'],
-  \   'cpp,cuda,objcpp': ['->', '.', '::'],
-  \   'perl': ['->'],
-  \   'php': ['->', '::'],
-  \   'cs,d,elixir,go,groovy,java,javascript,julia,perl6,python,scala,typescript,vb': ['.'],
-  \   'ruby,rust': ['.', '::'],
-  \   'lua': ['.', ':'],
-  \   'erlang': [':'],
-  \ }
+            \   'c': ['->', '.'],
+            \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+            \            're!\[.*\]\s'],
+            \   'ocaml': ['.', '#'],
+            \   'cpp,cuda,objcpp': ['->', '.', '::'],
+            \   'perl': ['->'],
+            \   'php': ['->', '::'],
+            \   'cs,d,elixir,go,groovy,java,javascript,julia,perl6,python,scala,typescript,vb': ['.'],
+            \   'ruby,rust': ['.', '::'],
+            \   'lua': ['.', ':'],
+            \   'erlang': [':'],
+            \ }
 
 
 
@@ -291,10 +304,14 @@ let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 " 快捷键 i 开/关缩进可视化
 :nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+" custom indent colors
+let g:indent_guides_auto_colors = 0
+hi IndentGuidesOdd  ctermbg=grey
+hi IndentGuidesEven ctermbg=darkgrey
 
 
 
-" === signify ===
+" === vim-signify ===
 " 强制显示侧边栏
 set signcolumn=yes
 " default updatetime 4000ms is not good for async update
@@ -302,39 +319,13 @@ set updatetime=3000
 
 
 
-" === ale ===
-let g:ale_linters_explicit = 1
-let g:ale_completion_delay = 500
-let g:ale_echo_delay = 20
-let g:ale_lint_delay = 500
-let g:ale_echo_msg_format = '[%linter%] %code: %%s'
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
-let g:airline#extensions#ale#enabled = 1
-
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-let g:ale_c_cppcheck_options = ''
-let g:ale_cpp_cppcheck_options = ''
-
-let g:ale_sign_error = "\ue009\ue009"
-hi! clear SpellBad
-hi! clear SpellCap
-hi! clear SpellRare
-hi! SpellBad gui=undercurl guisp=red
-hi! SpellCap gui=undercurl guisp=blue
-hi! SpellRare gui=undercurl guisp=magenta
-
-
-
-" === airline ===
-let g:airline_theme = 'codedark'
+" === vim-airline ===
 " enable airline tab line
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 1
- " 映射<leader>num到num buffer
+" 映射<leader>num到num buffer
 map <leader>1 :b 1<CR>
 map <leader>2 :b 2<CR>
 map <leader>3 :b 3<CR>
@@ -347,8 +338,9 @@ map <leader>9 :b 9<CR>
 
 
 
-" === ack ===
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" === ack.vim ===
+let g:ackprg = 'ag --vimgrep'
+" key bind
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 
@@ -361,51 +353,64 @@ let g:neoformat_basic_format_align = 1
 let g:neoformat_basic_format_retab = 1
 " Enable trimmming of trailing whitespace
 let g:neoformat_basic_format_trim = 1
+" run a formatter on save
+augroup fmt
+  autocmd!
+  autocmd BufWritePre *.rs undojoin | Neoformat
+  autocmd BufWritePre *.py undojoin | Neoformat
+augroup END
 
 
 
-" === vim-gutentags ===
-" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+" === vim-easy-align ===
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
-" 所生成的数据文件的名称
+
+
+" === gutentags ===
+" gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归 "
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+
+" 所生成的数据文件的名称 "
 let g:gutentags_ctags_tagfile = '.tags'
 
-" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录 "
 let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
+" 检测 ~/.cache/tags 不存在就新建 "
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
 
-" 配置 ctags 的参数
+" 配置 ctags 的参数 "
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 
 
-" === cscope ===
-if has("cscope")
-    " avoid 'Added cscope database' on vim launch
-    set nocscopeverbose
-    " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
-    set cscopetag
-    " check cscope for definition of a symbol before checking ctags: set to 1
-    " if you want the reverse search order.
-    set csto=0
-    " add any cscope database in current directory
-    if filereadable("cscope.out")
-        cs add cscope.out
-    endif
-    " show msg when any other cscope db added
-    set cscopeverbose
-    " key map
-    nmap <leader>fa :cs find a <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>fc :cs find c <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
-    nmap <leader>fg :cs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>fs :cs find s <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>fi :cs find i <C-R>=expand("<cfile>")<CR><CR>
-    nmap <leader>ft :cs find t <C-R>=expand("<cword>")<CR><CR>
-endif
+" === cscope.vim ===
+nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+nnoremap <leader>l :call ToggleLocationList()<CR>
+
+" s: Find this C symbol
+nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
+" g: Find this definition
+nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
+" d: Find functions called by this function
+nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
+" c: Find functions calling this function
+nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
+" t: Find this text string
+nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
+" e: Find this egrep pattern
+nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
+" f: Find this file
+nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
+" i: Find files #including this file
+nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
+
 
