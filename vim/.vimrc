@@ -32,9 +32,8 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-comp
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
-" tags and cscope
+" gen tags
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'brookhong/cscope.vim'
 call plug#end()
 
 
@@ -392,25 +391,42 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 
 
-" === cscope.vim ===
-nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-nnoremap <leader>l :call ToggleLocationList()<CR>
+" === cscope ===
+if has("cscope")
+    " build cscope database
+    function! Csbuild()
+        echohl WarningMsg | echo "please input a path to generate cscope db for." | echohl None
+        let d = input("", expand('%:p:h'), 'dir')
+        silent exec '!find '.d.' -name "*.[h|c]" > '.d.'/cscope.files'
+        silent exec '!cscope -b -q '.d.'/cscope.files'
+        exec '!echo build '.d.' cscope database success.'
+    endfunction
+    command! -bang CsbuildToggle    call Csbuild()
+    nmap <Leader>c :CsbuildToggle!<CR>
 
-" s: Find this C symbol
-nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
-" g: Find this definition
-nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
-" d: Find functions called by this function
-nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
-" c: Find functions calling this function
-nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
-" t: Find this text string
-nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
-" e: Find this egrep pattern
-nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
-" f: Find this file
-nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
-" i: Find files #including this file
-nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
+    " avoid 'Added cscope database' on vim launch
+    set nocscopeverbose
+    " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
+    set cscopetag
+    " check cscope for definition of a symbol before checking ctags: set to 1
+    " if you want the reverse search order.
+    set csto=0
+    " add any cscope database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out
+    endif
+    " show msg when any other cscope db added
+    set cscopeverbose
+    " key map
+    nmap <leader>fa :cs find a <C-R>=expand("<cword>")<CR><CR>
+    nmap <leader>fc :cs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
+    nmap <leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <leader>ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <leader>fg :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <leader>fs :cs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <leader>fi :cs find i <C-R>=expand("<cfile>")<CR><CR>
+    nmap <leader>ft :cs find t <C-R>=expand("<cword>")<CR><CR>
+endif
 
 
