@@ -152,9 +152,9 @@ set nofoldenable
 
 " When editing a file, always jump to the last cursor position
 autocmd BufReadPost *
-            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-            \   exe "normal g'\"" |
-            \ endif
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal g'\"" |
+  \ endif
 
 
 
@@ -195,7 +195,7 @@ let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 
 
 
-" === YCM ===
+" === YouCompleteMe ===
 " YCM 补全菜单配色
 " 菜单
 highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
@@ -237,12 +237,12 @@ endif
 
 " cpp ccls server
 let g:ycm_language_server =
-            \ [{
-            \   'name': 'ccls',
-            \   'cmdline': [ 'ccls' ],
-            \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
-            \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
-            \ }]
+  \ [{
+  \   'name': 'ccls',
+  \   'cmdline': [ 'ccls' ],
+  \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
+  \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
+  \ }]
 
 " 指定rust src目录
 let g:ycm_rust_src_path = '$HOME/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src'
@@ -259,18 +259,18 @@ set completeopt=menu,menuone
 noremap <c-z> <NOP>
 
 let g:ycm_semantic_triggers =  {
-            \   'c': ['->', '.'],
-            \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
-            \            're!\[.*\]\s'],
-            \   'ocaml': ['.', '#'],
-            \   'cpp,cuda,objcpp': ['->', '.', '::'],
-            \   'perl': ['->'],
-            \   'php': ['->', '::'],
-            \   'cs,d,elixir,go,groovy,java,javascript,julia,perl6,python,scala,typescript,vb': ['.'],
-            \   'ruby,rust': ['.', '::'],
-            \   'lua': ['.', ':'],
-            \   'erlang': [':'],
-            \ }
+  \   'c': ['->', '.'],
+  \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+  \            're!\[.*\]\s'],
+  \   'ocaml': ['.', '#'],
+  \   'cpp,cuda,objcpp': ['->', '.', '::'],
+  \   'perl': ['->'],
+  \   'php': ['->', '::'],
+  \   'cs,d,elixir,go,groovy,java,javascript,julia,perl6,python,scala,typescript,vb': ['.'],
+  \   'ruby,rust': ['.', '::'],
+  \   'lua': ['.', ':'],
+  \   'erlang': [':'],
+  \ }
 
 
 
