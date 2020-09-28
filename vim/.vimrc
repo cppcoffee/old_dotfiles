@@ -399,6 +399,7 @@ if has("cscope")
         let d = input("", expand('%:p:h'), 'dir')
         silent exec '!find '.d.' -name "*.[h|c]" > '.d.'/cscope.files'
         silent exec '!cscope -b -q '.d.'/cscope.files'
+        exec 'cs add '.d.'/cscope.out'
         exec '!echo build '.d.' cscope database success.'
     endfunction
     command! -bang CsbuildToggle    call Csbuild()
