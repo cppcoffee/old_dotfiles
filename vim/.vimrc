@@ -207,8 +207,6 @@ let g:ycm_complete_in_comments=1
 let g:ycm_confirm_extra_conf=0
 " 开启 YCM 标签补全引擎
 let g:ycm_collect_identifiers_from_tags_files=1
-" YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
-inoremap <leader>; <C-x><C-o>
 " go to definition
 nnoremap <leader>gt :YouCompleteMe GoTo<CR>
 " 跳转到定义
@@ -399,7 +397,7 @@ if has("cscope")
         let d = input("", expand('%:p:h'), 'dir')
         " build
         silent exec '!find '.d.' -name "*.[h|c]" > '.d.'/cscope.files'
-        silent exec '!cscope -b -q '.d.'/cscope.files'
+        silent exec '!cscope -b -q -i '.d.'/cscope.files'
         " load
         exec 'cs add '.d.'/cscope.out'
         cs reset
