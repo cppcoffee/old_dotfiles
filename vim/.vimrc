@@ -396,7 +396,7 @@ if has("cscope")
         echohl WarningMsg | echo "please input a path to generate cscope db for." | echohl None
         let d = input("", expand('%:p:h'), 'dir')
         " build
-        silent exec '!find '.d.' -name "*.[h|c]" > '.d.'/cscope.files'
+        silent exec '!find '.d.' -name "*.[h|c]" -o -name "*.cc" > '.d.'/cscope.files'
         silent exec '!cscope -b -q -i '.d.'/cscope.files'
         " load
         exec 'cs add '.d.'/cscope.out'
