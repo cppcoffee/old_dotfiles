@@ -211,8 +211,14 @@ let g:ycm_collect_identifiers_from_tags_files=1
 nnoremap <leader>gt :YouCompleteMe GoTo<CR>
 " 跳转到定义
 nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
+" 跳转到声明
+nnoremap <leader>gh :YcmCompleter GoToDeclaration<CR>
+" 跳转到引用
+nnoremap <leader>gr: YcmCompleter GoToReferences<CR>
 " goto doc
 nnoremap <leader>gc :YcmCompleter GetDoc<CR>
+" fix it
+nnoremap <leader>fi :YcmCompleter FixIt<CR>
 " 补全内容不以分割子窗口形式出现，只显示补全列表
 set completeopt-=preview
 " 从第2个键入字符就开始罗列匹配项
@@ -227,6 +233,8 @@ let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_python_interpreter_path = '/usr/local/bin/python3'
 " C family Completion Path
 let g:ycm_global_ycm_extra_conf = '$HOME/.vim/.ycm_extra_conf.py'
+" 禁用光标在符号上停留出现的自动文档提示功能
+let g:ycm_auto_hover = ''
 
 if has('python3')
     silent! python3 1
