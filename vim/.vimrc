@@ -277,6 +277,15 @@ let g:ycm_semantic_triggers =  {
   \   'erlang': [':'],
   \ }
 
+let g:ycm_language_server =
+  \ [
+  \   {
+  \     'name': 'rust',
+  \     'cmdline': ['rust-analyzer'],
+  \     'filetypes': ['rust'],
+  \     'project_root_files': ['Cargo.toml']
+  \   }
+  \ ]
 
 
 " === rust.vim ===
