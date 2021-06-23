@@ -145,9 +145,6 @@ set shiftwidth=4
 " 让 vim 把连续数量的空格视为一个制表符
 set softtabstop=4
 
-" 基于缩进或语法进行代码折叠
-"set foldmethod=indent
-set foldmethod=syntax
 " 启动 vim 时关闭折叠代码
 set nofoldenable
 
@@ -373,8 +370,6 @@ augroup fmt
   autocmd BufWritePre *.rs undojoin | Neoformat
   autocmd BufWritePre *.py undojoin | Neoformat
   autocmd BufWritePre *.go undojoin | Neoformat
-  autocmd BufWritePre *.[h|c] undojoin | Neoformat
-  autocmd BufWritePre *.cc undojoin | Neoformat
 augroup END
 
 
